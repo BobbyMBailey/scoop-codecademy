@@ -18,7 +18,7 @@ let createComments = function( url, request) {
     }
   }
 
-  if (!BaseController.hasValidRequestBody(request, [])) {
+  if (!BaseController.hasValidRequestBody(request, ['body', 'articleId'])) {
     return {
       body: {'errorMessage': 'One of the expected keys does not exist on the request body'},
       status: 400
