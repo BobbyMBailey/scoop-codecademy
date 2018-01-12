@@ -3,12 +3,12 @@ let hasValidRequestBody = function(request, requiredKeys) {
     let match = requiredKeys.filter(function(value, key){
         return Object.keys(body).indexOf(value) > -1;
     })
-    
+
     return match.length === requiredKeys.length;
 }
 
 module.exports = {
-    getCollectionByKey: function(key, url, request ){
+    getCollectionByKey: function(key, url, request, database ){
       const response = {};
   
       response.status = 200;
@@ -24,6 +24,6 @@ module.exports = {
     hasValidRequestBody: hasValidRequestBody,
 
     isUserAuthenticated: function(request, knownUsers) {
-       return !!(request && request.body && request.body.username && knownUsers.indexOf(request.body.username) >= 0); 
+      return !!(request && request.body && request.body.username && Object.keys(knownUsers).indexOf(request.body.username) >= 0);
     }
 }

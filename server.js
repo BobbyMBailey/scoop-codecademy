@@ -24,6 +24,7 @@ let createComments = function( url, request) {
       status: 400
     }
   }
+
  // Creating the comment object with the required keys
   const comment = {
     id: database.nextCommentId++,
@@ -36,6 +37,11 @@ let createComments = function( url, request) {
   // Saving the Entity
   database.comments[comment.id] = comment;
   database.users[comment.username].commentIds.push(comment.id);
+
+  return {
+    body: {comment: comment},
+    status: 201
+  }
 }
 
 let upvoteComments;
