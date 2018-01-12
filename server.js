@@ -120,10 +120,10 @@ const routes = {
     'PUT': updateComments,
     'DELETE': deleteComments
   },
-  '/articles/:id/upvote': {
+  '/comments/:id/upvote': {
     'PUT': upvoteComments
   },
-  '/articles/:id/downvote': {
+  '/comments/:id/downvote': {
     'PUT': downvoteComments
   },
 };
