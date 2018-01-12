@@ -75,7 +75,6 @@ describe('Scoop - server.js: ', function() {
   beforeEach(function() {
     serverModule.__set__('database', JSON.parse(JSON.stringify(originalDatabase)));
     database = serverModule.__get__('database');
-    console.log(database);
   });
 
   describe('Database Setup', function() {
