@@ -1,4 +1,3 @@
-const fs = require('fs');
 const BaseController = require('./src/server/BaseController')
 
 // database is let instead of const to allow us to modify it in test.js
@@ -11,7 +10,7 @@ let database = {
   nextCommentId: 1
 };
 
-function createComments( url, request) {
+let createComments = function( url, request) {
   if (!BaseController.isUserAuthenticated(request, database.users)) {
     return {
       body: {'errorMessage': 'User is Not Authenticated / Logged In'},
