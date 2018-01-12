@@ -28,7 +28,7 @@ let createComments = function( url, request) {
  // Creating the comment object with the required keys
   const comment = {
     id: database.nextCommentId++,
-    body: '',
+    body: request.body.comment.body,
     username: request.body.username,
     articleId: 0,
     upvotedBy: [],
