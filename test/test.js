@@ -139,7 +139,12 @@ describe('Scoop - server.js: ', function() {
         username: 'existing_user',
         articleId: 1
       };
-      var result = routes['/comments']['POST']('/comments', {body: {username: newComment.username, comment: newComment}});
+      var result = routes['/comments']['POST']('/comments', {
+        body: {
+          username: newComment.username,
+          comment: newComment
+        }
+      });
       expect(result).to.have.property('status', 201)
       expect(database.comments[originalNextCommentId]).to.exist;
       expect(database.comments[originalNextCommentId]).to.be.an('object');
