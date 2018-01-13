@@ -1,17 +1,17 @@
 let hasValidRequestBody = function(request, requiredKeys) {
     let body = request && request.body;
     let match = Object.keys(requiredKeys).filter(function(key){
-        var test = requiredKeys[key] 
+      var test = requiredKeys[key]
       if (typeof test === 'function') {
-          return test(body[key])
-        } else if (test.test) {
-            return test.test(body[key])
-        } else {
-            return false
-        }
+        return test(body[key])
+      } else if (test.test) {
+        return test.test(body[key])
+      } else {
+        return false
+      }
     })
 
-    return match.length === requiredKeys.length;
+    return match.length === Object.keys(requiredKeys).length;
 }
 
 module.exports = {
