@@ -159,8 +159,8 @@ describe('Scoop - server.js: ', function() {
         username: 'existing_user',
         articleId: 1
       };
-      routes['/comments']['POST']('/comments', {body: {comment: newComment}});
-
+      let result = routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
+      expect(result).to.have.property('status', 201)
       expect(database.nextCommentId).to.equal(originalNextCommentId + 1);
     });
 
@@ -170,7 +170,7 @@ describe('Scoop - server.js: ', function() {
         username: 'existing_user',
         articleId: 1
       };
-      routes['/comments']['POST']('/comments', {body: {comment: newComment}});
+      routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
 
       expect(database.users[newComment.username].commentIds).to.contain(originalNextCommentId);
     });
@@ -181,8 +181,8 @@ describe('Scoop - server.js: ', function() {
         username: 'existing_user',
         articleId: 1
       };
-      routes['/comments']['POST']('/comments', {body: {comment: newComment}});
-
+      routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
+      expect(database.articles).to.contain(newComment.articleId)
       expect(database.articles[newComment.articleId].commentIds).to.contain(originalNextCommentId);
     });
 
@@ -192,7 +192,7 @@ describe('Scoop - server.js: ', function() {
         username: 'existing_user',
         articleId: 1
       };
-      const response = routes['/comments']['POST']('/comments', {body: {comment: newComment}});
+      const response = routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
 
       expect(response).to.exist;
       expect(response.status).to.equal(201);
@@ -210,21 +210,21 @@ describe('Scoop - server.js: ', function() {
         username: 'existing_user',
         articleId: 1
       };
-      let response = routes['/comments']['POST']('/comments', {body: {comment: newComment}});
+      let response = routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
 
       expect(response).to.exist;
       expect(response.status).to.equal(400);
 
       newComment.body = 'Body';
       newComment.username = '';
-      response = routes['/comments']['POST']('/comments', {body: {comment: newComment}});
+      response = routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
 
       expect(response).to.exist;
       expect(response.status).to.equal(400);
 
       newComment.username = 'existing_user';
       newComment.articleId = '';
-      response = routes['/comments']['POST']('/comments', {body: {comment: newComment}});
+      response = routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
 
       expect(response).to.exist;
       expect(response.status).to.equal(400);
@@ -236,7 +236,7 @@ describe('Scoop - server.js: ', function() {
         username: 'nonexistent_user',
         articleId: 1
       };
-      const response = routes['/comments']['POST']('/comments', {body: {comment: newComment}});
+      const response = routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
 
       expect(response).to.exist;
       expect(response.status).to.equal(400);
@@ -248,7 +248,7 @@ describe('Scoop - server.js: ', function() {
         username: 'existing_user',
         articleId: 2
       };
-      const response = routes['/comments']['POST']('/comments', {body: {comment: newComment}});
+      const response = routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
 
       expect(response).to.exist;
       expect(response.status).to.equal(400);

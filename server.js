@@ -30,7 +30,7 @@ let createComments = function( url, request) {
     id: database.nextCommentId++,
     body: request.body.comment.body,
     username: request.body.username,
-    articleId: 0,
+    articleId: request.body.comment.articleId,
     upvotedBy: [],
     downvotedBy: []
   }
