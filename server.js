@@ -18,8 +18,8 @@ let createComments = function( url, request) {
     }
   }
 
-  if (!BaseController.hasValidRequestBody(request.body, ['comment']) && 
-      !BaseController.hasValidRequestBody(request.body.comment, {'body': /\S+/i})) {
+  if (!BaseController.hasValidEntity(request.body, ['comment']) &&
+      !BaseController.hasValidEntity(request.body.comment, {'body': /\S+/i})) {
     return {
       body: {'errorMessage': 'One of the expected keys does not exist on the request body'},
       status: 400
@@ -66,7 +66,8 @@ let createArticle = function(url, request) {
     }
   }
 
-  if (!BaseController.hasValidRequestBody(request, ['title', 'url'])) {
+  if (!BaseController.hasValidEntity(request.body, ['article']) &&
+      !BaseController.hasValidEntity(request.body.article, ['title', 'url'])) {
     return {
       body: {'errorMessage': 'One of the expected keys does not exist on the request body'},
       status: 400

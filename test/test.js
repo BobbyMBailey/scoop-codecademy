@@ -8,29 +8,25 @@ const expect = require('chai').expect;
 const BaseControllerModule = rewire('../src/server/BaseController.js')
 
 describe('Unit Test for BaseController - server/BaseController.js: ', function(){
-  it('hasValidRequestBody() returns true', function() {
-    let request = {
-      body: {
-        title: 'my title',
-        comments: []
-      }
+  it('hasValidEntity() returns true', function() {
+    let entity = {
+      title: 'my title',
+      comments: []
     }
-    expect(BaseControllerModule.hasValidRequestBody(request, {
+    expect(BaseControllerModule.hasValidEntity(entity, {
       'title': /\S+/i,
       'comments': Array.isArray
     })).to.be.true;
-    expect(BaseControllerModule.hasValidRequestBody(request, [
+    expect(BaseControllerModule.hasValidEntity(entity, [
       'title', 'comments'
     ])).to.be.true;
   })
 
-  it('hasValidRequestBody() returns false', function() {
-    let request = {
-      body: {
-        title: 'my title'
-      }
+  it('hasValidEntity() returns false', function() {
+    let entity = {
+      title: 'my title'
     }
-    expect(BaseControllerModule.hasValidRequestBody(request, ['title', 'comments'])).to.be.false;
+    expect(BaseControllerModule.hasValidEntity(entity, ['title', 'comments'])).to.be.false;
   })
 
   it('isUserAuthenticated() returns false', function() {
@@ -68,8 +64,7 @@ describe('Unit Test for BaseController - server/BaseController.js: ', function()
 })
 
 describe('Scoop - server.js: ', function() {
-  let database, routes, originalDatabase, originalNextArticleId,
-      originalCommentId;
+  let database, routes, originalDatabase, originalNextArticleId, originalCommentId;
 
   before(function() {
     database = serverModule.__get__('database');

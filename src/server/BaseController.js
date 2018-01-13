@@ -1,5 +1,4 @@
-let hasValidRequestBody = function(request, requiredKeys) {
-    let body = request && request.body;
+let hasValidEntity = function(entity, requiredKeys) {
     if (Array.isArray(requiredKeys)) {
       let _requiredKeys = {}
       requiredKeys.forEach(function(value){
@@ -11,11 +10,11 @@ let hasValidRequestBody = function(request, requiredKeys) {
     let match = Object.keys(requiredKeys).filter(function(key){
       var test = requiredKeys[key]
       if (typeof test === 'function') {
-        return test(body[key])
+        return test(entity[key])
       } else if (test.test) {
-        return test.test(body[key])
+        return test.test(entity[key])
       } else if (test === true) {
-        return body[key] && body.hasOwnProperty(key)
+        return entity[key] && entity.hasOwnProperty(key)
       } else {
         return false
       } 
@@ -37,8 +36,8 @@ module.exports = {
             
       return response;
     },
-    
-    hasValidRequestBody: hasValidRequestBody,
+
+    hasValidEntity: hasValidEntity,
 
     isUserAuthenticated: function(request, knownUsers) {
       return !!(request && request.body && request.body.username && Object.keys(knownUsers).indexOf(request.body.username) >= 0);
