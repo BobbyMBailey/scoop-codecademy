@@ -37,7 +37,7 @@ let createComments = function( url, request) {
   // Saving the Entity
   database.comments[comment.id] = comment;
   database.users[comment.username].commentIds.push(comment.id);
-
+  database.articles[comment.articleId].commentIds.push(comment.id);
   return {
     body: {comment: comment},
     status: 201

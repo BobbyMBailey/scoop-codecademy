@@ -15,7 +15,10 @@ describe('Unit Test for BaseController - server/BaseController.js: ', function()
         comments: []
       }
     }
-    expect(BaseControllerModule.hasValidRequestBody(request, ['title', 'comments'])).to.be.true;
+    expect(BaseControllerModule.hasValidRequestBody(request, {
+      'title': /\S+/i,
+      'comments': Array.isArray
+    })).to.be.true;
   })
 
   it('hasValidRequestBody() returns false', function() {
@@ -182,7 +185,6 @@ describe('Scoop - server.js: ', function() {
         articleId: 1
       };
       routes['/comments']['POST']('/comments', {body: {comment: newComment, username: newComment.username}});
-      expect(database.articles).to.contain(newComment.articleId)
       expect(database.articles[newComment.articleId].commentIds).to.contain(originalNextCommentId);
     });
 
