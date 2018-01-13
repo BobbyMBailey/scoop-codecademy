@@ -18,7 +18,8 @@ let createComments = function( url, request) {
     }
   }
 
-  if (!BaseController.hasValidRequestBody(request, ['comment'])) {
+  if (!BaseController.hasValidRequestBody(request.body, ['comment']) && 
+      !BaseController.hasValidRequestBody(request.body.comment, {'body': /\S+/i})) {
     return {
       body: {'errorMessage': 'One of the expected keys does not exist on the request body'},
       status: 400

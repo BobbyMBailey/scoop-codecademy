@@ -19,6 +19,9 @@ describe('Unit Test for BaseController - server/BaseController.js: ', function()
       'title': /\S+/i,
       'comments': Array.isArray
     })).to.be.true;
+    expect(BaseControllerModule.hasValidRequestBody(request, [
+      'title', 'comments'
+    ])).to.be.true;
   })
 
   it('hasValidRequestBody() returns false', function() {
@@ -54,7 +57,7 @@ describe('Unit Test for BaseController - server/BaseController.js: ', function()
   })
 
   it('isUserAuthenticated() returns true', function() {
-    let knownUsers = ['bobby'];
+    let knownUsers = {'bobby': {}};
     expect(BaseControllerModule.isUserAuthenticated({
       body: 
         {

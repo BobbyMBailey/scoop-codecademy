@@ -1,14 +1,24 @@
 let hasValidRequestBody = function(request, requiredKeys) {
     let body = request && request.body;
+    if (Array.isArray(requiredKeys)) {
+      let _requiredKeys = {}
+      requiredKeys.forEach(function(value){
+        _requiredKeys[value] = true
+      })
+      requiredKeys = _requiredKeys
+    }
+
     let match = Object.keys(requiredKeys).filter(function(key){
       var test = requiredKeys[key]
       if (typeof test === 'function') {
         return test(body[key])
       } else if (test.test) {
         return test.test(body[key])
+      } else if (test === true) {
+        return body[key] && body.hasOwnProperty(key)
       } else {
         return false
-      }
+      } 
     })
 
     return match.length === Object.keys(requiredKeys).length;
