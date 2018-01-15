@@ -105,6 +105,16 @@ function getOrCreateUser (url, request) {
   return response
 }
 
+let saveDatabase = function () {
+  // Replace this function's algorithm to get bonus points
+  console.warn('Database persistence is not implemented. Bonus points if you finish it.')
+}
+
+let loadDatabase = function () {
+  // Replace this function's algorithm to get bonus points
+  console.warn('Database persistence is not implemented. Bonus points if you finish it.')
+}
+
 const port = process.env.PORT || 4000
 const isTestMode = process.env.IS_TEST_MODE
 
@@ -137,7 +147,7 @@ const requestHandler = (request, response) => {
 
   if (method === 'GET' || method === 'DELETE') {
     const methodResponse = routes[route][method].call(null, url)
-    if (!isTestMode && (typeof saveDatabase === 'function')) {
+    if (!isTestMode) {
       saveDatabase()
     }
 
@@ -175,7 +185,7 @@ const getRequestRoute = (url) => {
   }
 }
 
-if (typeof loadDatabase === 'function' && !isTestMode) {
+if (!isTestMode) {
   const savedDatabase = loadDatabase()
   if (savedDatabase) {
     for (let key in database) {
