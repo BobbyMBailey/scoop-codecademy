@@ -1,0 +1,18 @@
+{
+  "extends": "standard",
+  "plugins": [
+    "standard",
+    "chai-friendly"
+  ],
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "globals": {
+  },
+  "rules": {
+    "no-unused-expressions": 0,
+    "chai-friendly/no-unused-expressions": 2
+  }
+}
