@@ -1,5 +1,25 @@
 # The Scoop
 
+## Testing / How to Know You're on the Right Track
+
+A testing suite has been provided for you, checking for all essential functionality and
+edge cases we're anticipating you've completed for this exercise
+
+To run these tests, first, open the root project directory in your terminal. Then run `npm install` to install
+all necessary testing dependencies (if you haven't already).
+Finally, run `npm test`. You will see a list of tests that ran with information
+about whether or not each test passed. After this list, you will see more specific output
+about why each failing test failed.
+
+As you implement functionality, run the tests to
+ensure you are creating correctly named variables and functions that return the proper values.
+The tests will additionally help you identify edge cases that you may not have anticipated
+when first writing the functions.
+
+We're providing Standard JS to make fluent reading and consistency present throughout the course
+You can read up on how to integrate it with your IDE of choice (e.g. https://marketplace.visualstudio.com/items?itemName=chenxsan.vscode-standardjs)
+You can run it by `yarn lint` so you can do both `yarn lint && yarn test` 
+
 ## Project Overview
 
 In this project, you will build all of the routing and database logic for an article submission web app called The Scoop.
@@ -88,19 +108,3 @@ Currently every time you start and stop your server, your database object will g
 **saveDatabase**
 
 - Writes the current value of `database` to a YAML file
-
-## Testing
-
-A testing suite has been provided for you, checking for all essential functionality and
-edge cases.
-
-To run these tests, first, open the root project directory in your terminal. Then run `npm install` to install
-all necessary testing dependencies (if you haven't already).
-Finally, run `npm test`. You will see a list of tests that ran with information
-about whether or not each test passed. After this list, you will see more specific output
-about why each failing test failed.
-
-As you implement functionality, run the tests to
-ensure you are creating correctly named variables and functions that return the proper values.
-The tests will additionally help you identify edge cases that you may not have anticipated
-when first writing the functions.
